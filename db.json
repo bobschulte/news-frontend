@@ -1,0 +1,58 @@
+{
+    "status": "ok",
+    "totalResults": 36,
+    "articles": [
+        {
+            "source": {
+                "id": "the-verge",
+                "name": "The Verge"
+            },
+            "author": null,
+            "title": "Ancient black hole collision is the most massive researchers have ever observed - The Verge",
+            "description": null,
+            "url": "https://www.theverge.com/2018/12/3/18123678/gravitational-waves-black-holes-collision-ligo",
+            "urlToImage": null,
+            "publishedAt": "2018-12-03T19:03:06Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "the-verge",
+                "name": "The Verge"
+            },
+            "author": "Chaim Gartenberg",
+            "title": "Google expands eSIM support on the Pixel 3 to Sprint and other carriers - The Verge",
+            "description": "Google became the first smartphone company to support built-in eSIMs with its Project Fi (now Google Fi) network last year. Now, it's expanding that even further with the announcement of several new carriers around the world that will support the feature, as …",
+            "url": "https://www.theverge.com/circuitbreaker/2018/12/3/18123947/google-esim-support-pixel-3-sprint-international",
+            "urlToImage": "https://cdn.vox-cdn.com/thumbor/tYIUhQPuXggoKPpV90Ax3d6B0oc=/0x146:2040x1214/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/13242963/DSCF0995.jpg",
+            "publishedAt": "2018-12-03T18:39:37Z",
+            "content": "Google became the first smartphone company to support built-in eSIMs with its Project Fi ( now Google Fi ) network last year. Now, its expanding that even further with the announcement of several new carriers around the world that will support the feature. In… [+566 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "Washingtonexaminer.com"
+            },
+            "author": null,
+            "title": "George HW Bush's funeral invitation to Trump completes his legacy of noble civility - Washington Examiner",
+            "description": null,
+            "url": "https://www.washingtonexaminer.com/opinion/george-h-w-bushs-funeral-invitation-to-trump-completes-his-legacy-of-noble-civility",
+            "urlToImage": null,
+            "publishedAt": "2018-12-03T18:30:00Z",
+            "content": null
+        },
+        {
+            "source": {
+                "id": "cbs-news",
+                "name": "CBS News"
+            },
+            "author": null,
+            "title": "Bus carrying youth football team crashes in Arkansas, killing 1 child, injuring dozens - CBS News",
+            "description": null,
+            "url": "https://www.cbsnews.com/news/arkansas-bus-crash-leaves-child-dead-dozens-injured-2018-12-03/",
+            "urlToImage": null,
+            "publishedAt": "2018-12-03T18:20:00Z",
+            "content": null
+        }
+    ]
+}
