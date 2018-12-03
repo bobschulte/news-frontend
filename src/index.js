@@ -1,5 +1,8 @@
-const notesList = document.querySelector('#notes-list')
-const update = document.querySelector('#update')
+const navBar = document.querySelector('#navbar')
+const publicationsBar = document.querySelector('#bar-publications')
+const trendingBar = document.querySelector('#bar-trending')
+const restOfPage = document.querySelector('#dynamic-page')
+
 let articles
 
 fetch('http://localhost:3000/articles')
@@ -12,22 +15,11 @@ fetch('http://localhost:3000/articles')
   })
 
 const render = function() {
-  renderNotesList()
-  renderUpdate()
+  // renderPublicationsBar()
+  // renderTrendingBar()
+  renderRestOfPage()
 }
 
-const renderNotesList = function() {
-  notesList.innerHTML = ''
-  articles.forEach(function(article) {
-    renderListItem(article)
-  })
-}
-
-const renderListItem = function(article) {
-  const listItem = notesList.appendChild(document.createElement('li'))
-  listItem.innerText = `${article.title}`
-}
-
-const renderUpdate = function() {
-  update.innerHTML = `<h1>THIS STILL WORKS</h1>`
+const renderRestOfPage = function() {
+  restOfPage.innerHTML = `<h1>Featured Article: ${articles[0].title}</h1>`
 }

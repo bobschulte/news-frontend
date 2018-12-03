@@ -7,10 +7,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
-    <nav></nav>
-    <ul id='notes-list'></ul>
-    <div id='update'></div>
-    <script src="src/news-api.js"</script>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid" id='navbar'>
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">NAVBAR</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid" id='rest-of-page'>
+      <div class="row">
+        <!-- thin column for publication icons -->
+        <div class="col" id='bar-publications'>Icons go here</div>
+        <!-- column for large dynamic window in middle -->
+        <div class="col-8" id='dynamic-page'></div>
+        <!-- medium column for trending articles -->
+        <div class="col" id='bar-trending'>Trending articles go here</div>
+      </div>
+    </div>
+    <script src="src/news-api.js"></script>
     <script src="src/index.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -19,46 +33,32 @@
 </html>
 
 
-<!-- <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="<%= cocktails_path %>">Bartender 101</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <% if session[:current_user_id] %>
-            <li><%= link_to "Profile", user_path(current_user) %></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="<%= cocktails_path %>">Cocktails</a></li>
-                <li><a href="<%= ingredients_path %>">Ingredients</a></li>
-              </ul>
-            </li>
-            <li><%= link_to "Logout", logout_path, method: 'post' %></li>
-            <div class="input-group">
-              <form class="navbar-form navbar-left" action="<%= cocktails_path %>" >
-                <input type="text" name="search" id="search" class="form-control" placeholder="Search Cocktails">
-                <button type="submit" class="btn btn-default">
-                  <i class="glyphicon glyphicon-search"></i>
-                </button>
-              </form>
-            </div>
-          <% end %>
-        </ul>
-      </div>
-    </nav>
-    <div class="header">
-      <div class="bg-image">
 
-      </div>
-
-      <div class="bg-text">
-        <h1 class="bg-text-h1">BARTENDER 101</h1>
-      </div>
-    </div >
-    <div class="container">
-      <%= yield %>
+<!-- <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="<%= cocktails_path %>">Bartender 101</a>
     </div>
-    <br>
-  </body> -->
+    <ul class="nav navbar-nav">
+      <% if session[:current_user_id] %>
+        <li><%= link_to "Profile", user_path(current_user) %></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="<%= cocktails_path %>">Cocktails</a></li>
+            <li><a href="<%= ingredients_path %>">Ingredients</a></li>
+          </ul>
+        </li>
+        <li><%= link_to "Logout", logout_path, method: 'post' %></li>
+        <div class="input-group">
+          <form class="navbar-form navbar-left" action="<%= cocktails_path %>" >
+            <input type="text" name="search" id="search" class="form-control" placeholder="Search Cocktails">
+            <button type="submit" class="btn btn-default">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </form>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+</nav> -->
