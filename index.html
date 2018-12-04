@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>Real News</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <nav class="navbar navbar-inverse">
@@ -16,48 +24,59 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-1" id='bar-publications'>Icons go here</div>
-        <div class="col-8" id='primary-page'>
-        </div>
-        <div class="col" id='bar-trending'>Trending articles go here</div>
+        <div class="col-8" id='primary-page'></div>
+        <div class="col" id="bar-trending">Trending articles go here</div>
       </div>
     </div>
     <script src="config-api-key.js"></script>
     <script src="src/utils.js"></script>
     <script src="src/news-api.js"></script>
     <script src="src/index.js" charset="utf-8"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
 
-
-
-<!-- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="<%= cocktails_path %>">Bartender 101</a>
+<!--
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="<%= cocktails_path %>">Bartender 101</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <% if session[:current_user_id] %>
+          <li><%= link_to "Profile", user_path(current_user) %></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= cocktails_path %>">Cocktails</a></li>
+              <li><a href="<%= ingredients_path %>">Ingredients</a></li>
+            </ul>
+          </li>
+          <li><%= link_to "Logout", logout_path, method: 'post' %></li>
+          <div class="input-group">
+            <form class="navbar-form navbar-left" action="<%= cocktails_path %>" >
+              <input type="text" name="search" id="search" class="form-control" placeholder="Search Cocktails">
+              <button type="submit" class="btn btn-default">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </form>
+          </div>
+        <% end %>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <% if session[:current_user_id] %>
-        <li><%= link_to "Profile", user_path(current_user) %></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Browse <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="<%= cocktails_path %>">Cocktails</a></li>
-            <li><a href="<%= ingredients_path %>">Ingredients</a></li>
-          </ul>
-        </li>
-        <li><%= link_to "Logout", logout_path, method: 'post' %></li>
-        <div class="input-group">
-          <form class="navbar-form navbar-left" action="<%= cocktails_path %>" >
-            <input type="text" name="search" id="search" class="form-control" placeholder="Search Cocktails">
-            <button type="submit" class="btn btn-default">
-              <i class="glyphicon glyphicon-search"></i>
-            </button>
-          </form>
-        </div>
-      <% end %>
-    </ul>
-  </div>
-</nav> -->
+  </nav>
+-->
