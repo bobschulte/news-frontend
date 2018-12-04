@@ -6,7 +6,7 @@ const sources_path = "sources?&";
 const everything_path = "everything?";
 
 let headlines;
-let sources;
+var sources;
 let keyword_articles;
 let keyword = "cat"; //get this from event listener in nav bar
 
@@ -55,6 +55,4 @@ const fetch_keyword_articles = function() {
     });
 };
 
-fetch_headlines();
-fetch_sources();
-fetch_keyword_articles();
+console.log("my headlines are", headlines);
