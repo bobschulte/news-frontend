@@ -114,7 +114,6 @@ const renderBackButton = function(domElement) {
   backButton.addEventListener("click", backToHome);
 };
 
-
 // HELPER FUNCTIONS
 const resetCurrentArticle = function() {
   currentArticle = null;
