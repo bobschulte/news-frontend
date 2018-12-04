@@ -5,7 +5,6 @@ const trendingBar = document.querySelector("#bar-trending");
 const primaryPage = document.querySelector("#primary-page");
 
 // DATA
-
 let featuredArticle
 let currentArticle
 let currentPublication
@@ -113,7 +112,6 @@ const renderBackButton = function(domElement) {
   backButton.innerText = "Back to Home Page";
   backButton.addEventListener("click", backToHome);
 };
-
 
 // HELPER FUNCTIONS
 const resetCurrentArticle = function() {
