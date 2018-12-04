@@ -1,13 +1,17 @@
+// DOM ELEMENTS
 const navBar = document.querySelector('#navbar')
 const publicationsBar = document.querySelector('#bar-publications')
 const trendingBar = document.querySelector('#bar-trending')
 const primaryPage = document.querySelector('#primary-page')
-const endPoint = 'http://localhost:3000/articles'
 
+// DATA
+const endPoint = 'http://localhost:3000/articles'
 let articles
 let featuredArticle
 let currentArticle
 
+
+// FETCH FROM SERVER
 fetch(endPoint)
   .then(function(resp) {
     return resp.json()
@@ -18,6 +22,7 @@ fetch(endPoint)
     render()
   })
 
+// RENDER FUNCTIONS
 const render = function() {
   renderNavBar()
   // renderPublicationsBar()
