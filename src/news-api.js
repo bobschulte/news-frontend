@@ -5,10 +5,12 @@ const headlines_path = "top-headlines?language=en&";
 const sources_path = "sources?&";
 const everything_path = "everything?";
 
+
 let headlines
 let sources
 let keyword_articles
 let keyword = "cat";
+
 
 const fetch_headlines = function() {
   return fetch(`https://newsapi.org/v2/top-headlines?language=en&${API_KEY}`, {
@@ -43,6 +45,7 @@ const fetch_keyword_articles = function(keyword) {
     })
 };
 
+
 const newsApiFetch = function() {
   fetch_headlines()
     .then(function(response) {
@@ -58,3 +61,4 @@ const newsApiFetch = function() {
         })
     })
 }
+
