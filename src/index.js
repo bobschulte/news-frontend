@@ -5,21 +5,12 @@ const trendingBar = document.querySelector("#bar-trending");
 const primaryPage = document.querySelector("#primary-page");
 
 // DATA
-const endPoint = "http://localhost:3000/articles";
-let articles;
-let featuredArticle;
-let currentArticle;
+
+let featuredArticle
+let currentArticle
 
 // FETCH FROM SERVER
-fetch(endPoint)
-  .then(function(resp) {
-    return resp.json();
-  })
-  .then(function(result) {
-    articles = result;
-    featuredArticle = articles[1];
-    render();
-  });
+newsApiFetch()
 
 // RENDER FUNCTIONS
 const render = function() {
@@ -51,8 +42,10 @@ const renderPrimaryPage = function() {
   if (currentArticle) {
     renderArticle(currentArticle);
   } else {
-    renderFeature(featuredArticle);
-    renderArticleList();
+
+    renderFeature()
+    renderArticleList()
+
   }
 };
 
@@ -67,29 +60,28 @@ const renderArticle = function(article) {
   renderBackButton(primaryPage);
 };
 
-const renderFeature = function(article) {
-  const featureDiv = primaryPage.appendChild(document.createElement("div"));
+
+const renderFeature = function() {
+  const featureDiv = primaryPage.appendChild(document.createElement('div'))
   featureDiv.innerHTML = `
-    <img class="feature-img" src="${
-      article.urlToImage
-    }" alt="generic-pic" width="832px">
-    <h1>${configureTitle.call(article)}</h1>
-  `;
-  featureDiv.addEventListener("click", function() {
-    currentArticle = article;
-    render();
-  });
-};
+    <img class="feature-img" src="${headlines[0].urlToImage}" alt="generic-pic" width="832px">
+    <h1>${configureTitle.call(headlines[0])}</h1>
+  `
+  featureDiv.addEventListener('click', function() {
+    currentArticle = headlines[0]
+    render()
+  })
+}
 
 const renderArticleList = function() {
-  const articleList = primaryPage
-    .appendChild(document.createElement("div"))
-    .appendChild(document.createElement("ul"));
-  articleList.setAttribute("class", "list-unstyled");
-  articles.forEach(function(article) {
-    renderArticleListItem(article, articleList);
-  });
-};
+  const articleList = primaryPage.appendChild(document.createElement('div')).appendChild(document.createElement('ul'))
+  articleList.setAttribute("class", 'list-unstyled')
+  console.log(headlines)
+  headlines.forEach(function(article) {
+    renderArticleListItem(article, articleList)
+  })
+}
+
 
 const renderArticleListItem = function(article, articleList) {
   const articleListItem = articleList.appendChild(document.createElement("li"));
