@@ -5,29 +5,18 @@ const trendingBar = document.querySelector('#bar-trending')
 const primaryPage = document.querySelector('#primary-page')
 
 // DATA
-const endPoint = 'http://localhost:3000/articles'
-let articles
 let featuredArticle
 let currentArticle
 
-
 // FETCH FROM SERVER
-fetch(endPoint)
-  .then(function(resp) {
-    return resp.json()
-  })
-  .then(function(result) {
-    articles = result
-    featuredArticle = articles[1]
-    render()
-  })
+newsApiFetch()
 
 // RENDER FUNCTIONS
 const render = function() {
-  renderNavBar()
-  // renderPublicationsBar()
-  // renderTrendingBar()
-  renderPrimaryPage()
+  // renderNavBar()
+  // // renderPublicationsBar()
+  // // renderTrendingBar()
+  // renderPrimaryPage()
 }
 
 const renderNavBar = function() {
@@ -81,7 +70,7 @@ const renderFeature = function(article) {
 const renderArticleList = function() {
   const articleList = primaryPage.appendChild(document.createElement('div')).appendChild(document.createElement('ul'))
   articleList.setAttribute("class", 'list-unstyled')
-  articles.forEach(function(article) {
+  headlines.forEach(function(article) {
     renderArticleListItem(article, articleList)
   })
 }
