@@ -8,6 +8,7 @@ const primaryPage = document.querySelector("#primary-page");
 
 let featuredArticle
 let currentArticle
+let currentPublication
 
 // FETCH FROM SERVER
 newsApiFetch()
@@ -15,7 +16,7 @@ newsApiFetch()
 // RENDER FUNCTIONS
 const render = function() {
   renderNavBar();
-  // renderPublicationsBar()
+  renderPublicationsBar();
   // renderTrendingBar()
   renderPrimaryPage();
 };
@@ -29,9 +30,20 @@ const renderNavBar = function() {
   icon.addEventListener("click", backToHome);
 };
 
-// const renderPublicationsBar = function() {
-//
-// }
+const renderPublicationsBar = function() {
+  publicationsBar.innerHTML = ''
+  sources.forEach(function(source) {
+    renderPublication(source)
+  })
+}
+
+const renderPublication = function(source) {
+  const publication = publicationsBar.appendChild(document.createElement('p'))
+  publication.innerText = `${source.name}`
+  publication.addEventListener('click', function() {
+    alert(`${source.name} was clicked!`)
+  })
+}
 
 // const renderTrendingBar = function() {
 //
@@ -42,10 +54,8 @@ const renderPrimaryPage = function() {
   if (currentArticle) {
     renderArticle(currentArticle);
   } else {
-
     renderFeature()
     renderArticleList()
-
   }
 };
 
@@ -60,15 +70,15 @@ const renderArticle = function(article) {
   renderBackButton(primaryPage);
 };
 
-
 const renderFeature = function() {
+  featuredArticle = headlines[0]
   const featureDiv = primaryPage.appendChild(document.createElement('div'))
   featureDiv.innerHTML = `
-    <img class="feature-img" src="${headlines[0].urlToImage}" alt="generic-pic" width="832px">
-    <h1>${configureTitle.call(headlines[0])}</h1>
+    <img class="feature-img" src="${featuredArticle.urlToImage}" alt="generic-pic" width="832px">
+    <h1>${configureTitle.call(featuredArticle)}</h1>
   `
   featureDiv.addEventListener('click', function() {
-    currentArticle = headlines[0]
+    currentArticle = featuredArticle
     render()
   })
 }
@@ -76,12 +86,10 @@ const renderFeature = function() {
 const renderArticleList = function() {
   const articleList = primaryPage.appendChild(document.createElement('div')).appendChild(document.createElement('ul'))
   articleList.setAttribute("class", 'list-unstyled')
-  console.log(headlines)
   headlines.forEach(function(article) {
     renderArticleListItem(article, articleList)
   })
 }
-
 
 const renderArticleListItem = function(article, articleList) {
   const articleListItem = articleList.appendChild(document.createElement("li"));
@@ -100,21 +108,19 @@ const renderArticleListItem = function(article, articleList) {
   });
 };
 
-const resetCurrentArticle = function() {
-  currentArticle = null;
-};
-
 const renderBackButton = function(domElement) {
   const backButton = domElement.appendChild(document.createElement("button"));
   backButton.innerText = "Back to Home Page";
   backButton.addEventListener("click", backToHome);
 };
 
+
+// HELPER FUNCTIONS
+const resetCurrentArticle = function() {
+  currentArticle = null;
+};
+
 const backToHome = function() {
   resetCurrentArticle();
   render();
 };
-
-fetch_headlines();
-fetch_sources();
-// fetch_keyword_articles()
