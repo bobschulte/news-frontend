@@ -13,10 +13,10 @@ newsApiFetch()
 
 // RENDER FUNCTIONS
 const render = function() {
-  // renderNavBar()
-  // // renderPublicationsBar()
-  // // renderTrendingBar()
-  // renderPrimaryPage()
+  renderNavBar()
+  // renderPublicationsBar()
+  // renderTrendingBar()
+  renderPrimaryPage()
 }
 
 const renderNavBar = function() {
@@ -41,7 +41,7 @@ const renderPrimaryPage = function() {
   if (currentArticle) {
     renderArticle(currentArticle)
   } else {
-    renderFeature(featuredArticle)
+    renderFeature()
     renderArticleList()
   }
 }
@@ -55,14 +55,14 @@ const renderArticle = function(article) {
   renderBackButton(primaryPage)
 }
 
-const renderFeature = function(article) {
+const renderFeature = function() {
   const featureDiv = primaryPage.appendChild(document.createElement('div'))
   featureDiv.innerHTML = `
-    <img class="feature-img" src="${article.urlToImage}" alt="generic-pic" width="832px">
-    <h1>${configureTitle.call(article)}</h1>
+    <img class="feature-img" src="${headlines[0].urlToImage}" alt="generic-pic" width="832px">
+    <h1>${configureTitle.call(headlines[0])}</h1>
   `
   featureDiv.addEventListener('click', function() {
-    currentArticle = article
+    currentArticle = headlines[0]
     render()
   })
 }
@@ -70,6 +70,7 @@ const renderFeature = function(article) {
 const renderArticleList = function() {
   const articleList = primaryPage.appendChild(document.createElement('div')).appendChild(document.createElement('ul'))
   articleList.setAttribute("class", 'list-unstyled')
+  console.log(headlines)
   headlines.forEach(function(article) {
     renderArticleListItem(article, articleList)
   })
