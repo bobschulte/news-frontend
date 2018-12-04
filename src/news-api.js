@@ -54,3 +54,7 @@ const fetch_keyword_articles = function() {
       console.log(response);
     });
 };
+
+fetch_headlines();
+fetch_sources();
+fetch_keyword_articles();
