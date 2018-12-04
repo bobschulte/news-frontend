@@ -1,3 +1,6 @@
 function configureTitle() {
-  return this.title.split(" - ").reverse().join(" - ")
+  return this.title
+    .split(" - ")
+    .reverse()
+    .join(" - ");
 }

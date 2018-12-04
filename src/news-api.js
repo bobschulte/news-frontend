@@ -20,13 +20,13 @@ const fetch_headlines = function() {
       return response.json();
     })
     .then(function(response) {
-      headlines = response;
-      console.log(response);
+      headlines = response.articles;
+      console.log(headlines);
     });
 };
 
 const fetch_sources = function() {
-  fetch(`https://newsapi.org/v2/sources?&${API_KEY}`, {
+  fetch(`https://newsapi.org/v2/sources?country=us&language=en&${API_KEY}`, {
     headers: {
       authorization: `Bearer ${API_KEY}`
     }
@@ -35,8 +35,8 @@ const fetch_sources = function() {
       return response.json();
     })
     .then(function(response) {
-      sources = response;
-      console.log(response);
+      sources = response.sources;
+      console.log(sources);
     });
 };
 
@@ -50,7 +50,11 @@ const fetch_keyword_articles = function() {
       return response.json();
     })
     .then(function(response) {
-      keyword_articles = response;
-      console.log(response);
+      keyword_articles = response.articles;
+      console.log(keyword_articles);
     });
 };
+
+fetch_headlines();
+fetch_sources();
+fetch_keyword_articles();
