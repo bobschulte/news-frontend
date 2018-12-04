@@ -108,14 +108,16 @@ const renderArticleListItem = function(article, articleList) {
   });
 };
 
-const resetCurrentArticle = function() {
-  currentArticle = null;
-};
-
 const renderBackButton = function(domElement) {
   const backButton = domElement.appendChild(document.createElement("button"));
   backButton.innerText = "Back to Home Page";
   backButton.addEventListener("click", backToHome);
+};
+
+
+// HELPER FUNCTIONS
+const resetCurrentArticle = function() {
+  currentArticle = null;
 };
 
 const backToHome = function() {
