@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Real News</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
@@ -14,16 +15,18 @@
         </div>
       </div>
     </nav>
-    <div class="container-fluid" id='rest-of-page'>
-      <div class="row">
-        <!-- thin column for publication icons -->
-        <div class="col" id='bar-publications'>Icons go here</div>
-        <!-- column for large dynamic window in middle -->
-        <div class="col-8" id='dynamic-page'></div>
-        <!-- medium column for trending articles -->
+    <div class="container-fluid">
+      <div class="row" id='primary-box'>
+        <div class="col-1" id='bar-publications'>Icons go here</div>
+        <div class="col-8">
+          <div id='feature'></div>
+          <div id='article-list'></div>
+        </div>
         <div class="col" id='bar-trending'>Trending articles go here</div>
       </div>
     </div>
+    <script src="config-api-key.js"></script>
+    <script src="src/utils.js"></script>
     <script src="src/news-api.js"></script>
     <script src="src/index.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
