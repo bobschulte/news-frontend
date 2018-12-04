@@ -5,7 +5,6 @@ const trendingBar = document.querySelector("#bar-trending");
 const primaryPage = document.querySelector("#primary-page");
 
 // DATA
-
 let featuredArticle
 let currentArticle
 let currentPublication
