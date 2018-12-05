@@ -1,7 +1,7 @@
-const railsServer = railsAjax("http://localhost:3000/api/v1")
+// const railsServer = railsAjax("http://localhost:3000/api/v1")
 
-let stories
-let comments
+// let stories
+// let comments
 
 
 
