@@ -5,7 +5,7 @@ const trendingBar = document.querySelector("#bar-trending");
 const primaryPage = document.querySelector("#primary-page");
 
 // DATA
-let featuredArticle
+let featuredArticleIndex = 0
 let currentArticle
 let currentPublication
 
@@ -13,6 +13,11 @@ let currentPublication
 newsApiFetch()
 
 // RENDER FUNCTIONS
+setInterval(function() {
+  (featuredArticleIndex < 19) ? featuredArticleIndex++ : featuredArticleIndex = 0
+  render()
+}, 5000)
+
 const render = function() {
   renderNavBar();
   renderPublicationsBar();
@@ -22,9 +27,9 @@ const render = function() {
 
 const renderNavBar = function() {
   navBar.innerHTML = "";
-  const icon = navBar.appendChild(document.createElement("div"));
-  icon.setAttribute("id", "navbar-icon");
-  icon.setAttribute("class", "navbar-brand");
+  const icon = navBar.appendChild(document.createElement('div'));
+  icon.id = 'navbar-icon'
+  icon.className = 'navbar-brand'
   icon.innerText = "NAVBAR ICON HERE";
   icon.addEventListener("click", backToHome);
 };
@@ -70,7 +75,7 @@ const renderArticle = function(article) {
 };
 
 const renderFeature = function() {
-  featuredArticle = headlines[0]
+  const featuredArticle = headlines[featuredArticleIndex]
   const featureDiv = primaryPage.appendChild(document.createElement('div'))
   featureDiv.innerHTML = `
     <img class="feature-img" src="${featuredArticle.urlToImage}" alt="generic-pic" width="832px">
