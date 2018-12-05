@@ -1,4 +1,4 @@
-function configureTitle() {
+const configureTitle = function () {
   return this.title
     .split(" - ")
     .reverse()
