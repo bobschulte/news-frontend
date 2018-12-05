@@ -9,17 +9,19 @@ const searchBar = document.querySelector("#search");
 let featuredArticleIndex = 0;
 let currentArticle;
 let currentPublication;
+let keyword;
 
 // FETCH FROM SERVER
 newsApiFetch();
 
 // RENDER FUNCTIONS
-setInterval(function() {
-  featuredArticleIndex < 19
-    ? featuredArticleIndex++
-    : (featuredArticleIndex = 0);
-  render();
-}, 10000);
+
+// setInterval(function() {
+//   featuredArticleIndex < 19
+//     ? featuredArticleIndex++
+//     : (featuredArticleIndex = 0);
+//   render();
+// }, 10000);
 
 const render = function() {
   renderNavBar();
@@ -47,7 +49,7 @@ const renderNavBar = function() {
   searchButton.addEventListener("click", function(e) {
     e.preventDefault();
     keyword = searchInput.value;
-    newsApiFetch();
+    newsApiFetch(keyword);
     console.log(keyword_articles);
     renderKeyList();
     searchInput.innerText = "";
@@ -141,9 +143,9 @@ const renderKeyListItem = function(article, keyList) {
       <h5 class="mt-0 mb-1">${configureTitle.call(article)}</h5>
     </div>
    `;
-  // keyListItem.addEventListener("click", function() {
-  //   renderArticle(article);
-  // });
+  keyListItem.addEventListener("click", function() {
+    renderArticle(article);
+  });
 };
 //key list stuff end
 const renderArticleListItem = function(article, articleList) {
