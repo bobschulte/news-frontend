@@ -3,20 +3,23 @@ const navBar = document.querySelector("#navbar");
 const publicationsBar = document.querySelector("#bar-publications");
 const trendingBar = document.querySelector("#bar-trending");
 const primaryPage = document.querySelector("#primary-page");
+const searchBar = document.querySelector("#search");
 
 // DATA
-let featuredArticleIndex = 0
-let currentArticle
-let currentPublication
+let featuredArticleIndex = 0;
+let currentArticle;
+let currentPublication;
 
 // FETCH FROM SERVER
-newsApiFetch()
+newsApiFetch();
 
 // RENDER FUNCTIONS
 setInterval(function() {
-  (featuredArticleIndex < 19) ? featuredArticleIndex++ : featuredArticleIndex = 0
-  render()
-}, 5000)
+  featuredArticleIndex < 19
+    ? featuredArticleIndex++
+    : (featuredArticleIndex = 0);
+  render();
+}, 5000);
 
 const render = function() {
   renderNavBar();
@@ -27,27 +30,41 @@ const render = function() {
 
 const renderNavBar = function() {
   navBar.innerHTML = "";
-  const icon = navBar.appendChild(document.createElement('div'));
-  icon.id = 'navbar-icon'
-  icon.className = 'navbar-brand'
+  const icon = navBar.appendChild(document.createElement("div"));
+  icon.id = "navbar-icon";
+  icon.className = "navbar-brand";
   icon.innerText = "NAVBAR ICON HERE";
   icon.addEventListener("click", backToHome);
+
+  //search section of navBar
+  searchBar.innerHTML = "";
+  const searchForm = searchBar.appendChild(document.createElement("form"));
+  const searchInput = searchForm.appendChild(document.createElement("input"));
+  searchInput.placeholder = "enter keyword";
+  const searchButton = searchForm.appendChild(document.createElement("button"));
+  searchButton.innerText = "Search";
+  searchButton.addEventListener("click", function(e) {
+    e.preventDefault();
+    keyword = searchInput.value;
+    console.log(keyword);
+    searchInput.innerText = "";
+  });
 };
 
 const renderPublicationsBar = function() {
-  publicationsBar.innerHTML = ''
+  publicationsBar.innerHTML = "";
   sources.forEach(function(source) {
-    renderPublication(source)
-  })
-}
+    renderPublication(source);
+  });
+};
 
 const renderPublication = function(source) {
-  const publication = publicationsBar.appendChild(document.createElement('p'))
-  publication.innerText = `${source.name}`
-  publication.addEventListener('click', function() {
-    alert(`${source.name} was clicked!`)
-  })
-}
+  const publication = publicationsBar.appendChild(document.createElement("p"));
+  publication.innerText = `${source.name}`;
+  publication.addEventListener("click", function() {
+    alert(`${source.name} was clicked!`);
+  });
+};
 
 // const renderTrendingBar = function() {
 //
@@ -58,8 +75,8 @@ const renderPrimaryPage = function() {
   if (currentArticle) {
     renderArticle(currentArticle);
   } else {
-    renderFeature()
-    renderArticleList()
+    renderFeature();
+    renderArticleList();
   }
 };
 
@@ -75,25 +92,29 @@ const renderArticle = function(article) {
 };
 
 const renderFeature = function() {
-  const featuredArticle = headlines[featuredArticleIndex]
-  const featureDiv = primaryPage.appendChild(document.createElement('div'))
+  const featuredArticle = headlines[featuredArticleIndex];
+  const featureDiv = primaryPage.appendChild(document.createElement("div"));
   featureDiv.innerHTML = `
-    <img class="feature-img" src="${featuredArticle.urlToImage}" alt="generic-pic" width="832px">
+    <img class="feature-img" src="${
+      featuredArticle.urlToImage
+    }" alt="generic-pic" width="832px">
     <h1>${configureTitle.call(featuredArticle)}</h1>
-  `
-  featureDiv.addEventListener('click', function() {
-    currentArticle = featuredArticle
-    render()
-  })
-}
+  `;
+  featureDiv.addEventListener("click", function() {
+    currentArticle = featuredArticle;
+    render();
+  });
+};
 
 const renderArticleList = function() {
-  const articleList = primaryPage.appendChild(document.createElement('div')).appendChild(document.createElement('ul'))
-  articleList.setAttribute("class", 'list-unstyled')
+  const articleList = primaryPage
+    .appendChild(document.createElement("div"))
+    .appendChild(document.createElement("ul"));
+  articleList.setAttribute("class", "list-unstyled");
   headlines.forEach(function(article) {
-    renderArticleListItem(article, articleList)
-  })
-}
+    renderArticleListItem(article, articleList);
+  });
+};
 
 const renderArticleListItem = function(article, articleList) {
   const articleListItem = articleList.appendChild(document.createElement("li"));
