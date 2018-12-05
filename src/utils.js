@@ -5,7 +5,7 @@ function configureTitle() {
     .join(" - ");
 }
 
-const railsAjax = function (root) {
+const ajax = function (root) {
   return {
     get(path) {
       return fetch(`${root}${path}`)
@@ -42,5 +42,5 @@ const railsAjax = function (root) {
 
 const update = function(updater) {
   updater()
-  render()
+  // render()
 }
