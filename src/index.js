@@ -19,7 +19,7 @@ setInterval(function() {
     ? featuredArticleIndex++
     : (featuredArticleIndex = 0);
   render();
-}, 5000);
+}, 10000);
 
 const render = function() {
   renderNavBar();
@@ -46,7 +46,8 @@ const renderNavBar = function() {
   searchButton.addEventListener("click", function(e) {
     e.preventDefault();
     keyword = searchInput.value;
-    console.log(keyword);
+    // fetch_keyword_articles(keyword)
+    // .then();
     searchInput.innerText = "";
   });
 };
