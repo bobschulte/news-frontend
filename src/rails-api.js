@@ -1,5 +1,9 @@
 const railsServer = railsAjax("http://localhost:3000/api/v1")
 
+let stories
+let comments
+
+
 
 const railsAjax = function (root) {
     return {
