@@ -8,7 +8,7 @@ const everything_path = "everything?";
 let headlines;
 let sources;
 let keyword_articles;
-let keyword;
+let keyword = "cat";
 
 const fetch_headlines = function() {
   return fetch(`https://newsapi.org/v2/top-headlines?language=en&${API_KEY}`, {
@@ -33,7 +33,7 @@ const fetch_sources = function() {
   });
 };
 
-const fetch_keyword_articles = function(keyword) {
+const fetch_keyword_articles = function() {
   return fetch(`https://newsapi.org/v2/everything?q=${keyword}&${API_KEY}`, {
     headers: {
       authorization: `Bearer ${API_KEY}`
@@ -45,10 +45,13 @@ const fetch_keyword_articles = function(keyword) {
 
 const newsApiFetch = function() {
   fetch_headlines().then(function(response) {
-    headlines = response.articles;
+    headlines = response.articles.filter(article => article.urlToImage);
     fetch_sources().then(function(response) {
       sources = response.sources;
-      render();
+      fetch_keyword_articles().then(function(response) {
+        keyword_articles = response.articles;
+        render();
+      });
     });
   });
 };

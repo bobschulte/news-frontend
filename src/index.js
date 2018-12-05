@@ -37,6 +37,7 @@ const renderNavBar = function() {
   icon.addEventListener("click", backToHome);
 
   //search section of navBar
+
   searchBar.innerHTML = "";
   const searchForm = searchBar.appendChild(document.createElement("form"));
   const searchInput = searchForm.appendChild(document.createElement("input"));
@@ -46,8 +47,9 @@ const renderNavBar = function() {
   searchButton.addEventListener("click", function(e) {
     e.preventDefault();
     keyword = searchInput.value;
-    // fetch_keyword_articles(keyword)
-    // .then();
+    newsApiFetch();
+    console.log(keyword_articles);
+    renderKeyList();
     searchInput.innerText = "";
   });
 };
@@ -116,14 +118,41 @@ const renderArticleList = function() {
     renderArticleListItem(article, articleList);
   });
 };
+//key list stuff begin
+const renderKeyList = function() {
+  primaryPage.innerHTML = "";
+  const keyList = primaryPage
+    .appendChild(document.createElement("div"))
+    .appendChild(document.createElement("ul"));
+  keyList.setAttribute("class", "list-unstyled");
+  keyword_articles.forEach(function(article) {
+    renderKeyListItem(article, keyList);
+  });
+};
 
+const renderKeyListItem = function(article, keyList) {
+  const keyListItem = keyList.appendChild(document.createElement("li"));
+  keyListItem.setAttribute("class", "media");
+  keyListItem.innerHTML = `
+    <img class="mr-1" src="${
+      article.urlToImage
+    }" alt="generic-pic" width="96px">
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">${configureTitle.call(article)}</h5>
+    </div>
+   `;
+  // keyListItem.addEventListener("click", function() {
+  //   renderArticle(article);
+  // });
+};
+//key list stuff end
 const renderArticleListItem = function(article, articleList) {
   const articleListItem = articleList.appendChild(document.createElement("li"));
   articleListItem.setAttribute("class", "media");
   articleListItem.innerHTML = `
-    <img class="mr-1" src="${
-      article.urlToImage
-    }" alt="generic-pic" width="96px">
+      <img class="mr-1" src="${
+        article.urlToImage
+      } " alt="generic-pic" width="96px">
     <div class="media-body">
       <h5 class="mt-0 mb-1">${configureTitle.call(article)}</h5>
     </div>
