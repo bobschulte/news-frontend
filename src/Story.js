@@ -3,7 +3,7 @@ class Story {
         this.id = data.id
         this.title = data.title
         this.image = data.image
-        this. text = data.text
+        this.text = data.text
         Story.all.push(this)
     }
 }
