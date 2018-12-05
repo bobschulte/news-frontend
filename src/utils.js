@@ -39,3 +39,8 @@ const railsAjax = function (root) {
     }
   }
 }
+
+const update = function(updater) {
+  updater()
+  render()
+}
