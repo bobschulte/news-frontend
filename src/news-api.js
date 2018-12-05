@@ -3,8 +3,7 @@
 const root = "https://newsapi.org/v2/";
 const headlines_path = "top-headlines?language=en&";
 const sources_path = "sources?country=us&language=en&";
-let keyword = "cat";
-const everything_path = `everything?q=${keyword}&`;
+// const everything_path = `everything?q=${keyword}&`;
 
 let headlines;
 let sources;
@@ -21,20 +20,7 @@ const fetch_headlines = function() {
 };
 
 const fetch_sources = function() {
-  return fetch(
-    `${root}${sources_path}${API_KEY}`,
-    {
-      headers: {
-        authorization: `Bearer ${API_KEY}`
-      }
-    }
-  ).then(function(response) {
-    return response.json();
-  });
-};
-
-const fetch_keyword_articles = function() {
-  return fetch(`${root}${everything_path}${API_KEY}`, {
+  return fetch(`${root}${sources_path}${API_KEY}`, {
     headers: {
       authorization: `Bearer ${API_KEY}`
     }
@@ -43,13 +29,24 @@ const fetch_keyword_articles = function() {
   });
 };
 
-const newsApiFetch = function() {
+const fetch_keyword_articles = function(word = "cat") {
+  return fetch(`${root}everything?q=${word}&${API_KEY}`, {
+    headers: {
+      authorization: `Bearer ${API_KEY}`
+    }
+  }).then(function(response) {
+    return response.json();
+  });
+};
+
+const newsApiFetch = function(word = "cat") {
   fetch_headlines().then(function(response) {
     headlines = response.articles.filter(article => article.urlToImage);
     fetch_sources().then(function(response) {
       sources = response.sources;
-      fetch_keyword_articles().then(function(response) {
+      fetch_keyword_articles(word).then(function(response) {
         keyword_articles = response.articles;
+        console.log(response);
         render();
       });
     });
