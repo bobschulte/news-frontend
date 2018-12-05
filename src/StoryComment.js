@@ -1,9 +1,9 @@
-class Comment {
+class StoryComment {
   constructor(data) {
     this.description = data.description;
     this.story_id = data.story_id;
-    Comment.all.push(this);
+    StoryComment.all.push(this);
   }
 }
 
-Comment.all = [];
+StoryComment.all = [];
