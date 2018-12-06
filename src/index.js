@@ -10,6 +10,7 @@ let featuredArticleIndex = 0;
 let currentArticle;
 let currentPublication;
 let keyword;
+let databaseStory;
 
 // NOTES
 let currentStory;
@@ -31,7 +32,7 @@ newsApiFetch();
 // RENDER FUNCTIONS
 
 setInterval(function() {
-  featuredArticleIndex < 19
+  featuredArticleIndex < headlines.length - 1
     ? featuredArticleIndex++
     : (featuredArticleIndex = 0);
   render();
@@ -115,6 +116,7 @@ const renderArticle = function(article) {
   <p>To read full article, click
   <a href=${article.url} target="_blank">this link</a>.</p>
   `;
+  renderBookmarkButton(primaryPage);
   renderBackButton(primaryPage);
 };
 
@@ -164,6 +166,21 @@ const renderBackButton = function(domElement) {
   const backButton = domElement.appendChild(document.createElement("button"));
   backButton.innerText = "Back to Home Page";
   backButton.addEventListener("click", backToHome);
+};
+
+const renderBookmarkButton = function(domElement) {
+  const bookmarkButton = domElement.appendChild(
+    document.createElement("button")
+  );
+  bookmarkButton.innerText = "Bookmark Article";
+  bookmarkButton.addEventListener("click", function(e) {
+    bookmark(currentArticle).then(function() {
+      alert("Story bookmarked!");
+      getCurrentStory(currentArticle.id);
+      currentArticle = currentStory;
+      renderArticle(currentArticle);
+    });
+  });
 };
 
 // HELPER FUNCTIONS

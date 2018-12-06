@@ -21,7 +21,10 @@ const fetch_keyword_articles = function(word = "xyz") {
 
 const newsApiFetch = function(word = "xyz") {
   fetch_headlines().then(function(response) {
-    headlines = response.articles.filter(article => article.urlToImage);
+    headlines = response.articles.filter(
+      article =>
+        article.urlToImage && article.title && article.url && article.content
+    );
     fetch_sources().then(function(response) {
       sources = response.sources;
       fetch_keyword_articles(word).then(function(response) {
