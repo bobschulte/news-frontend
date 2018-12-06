@@ -2,67 +2,81 @@
 const railsApiServer = ajax("http://localhost:3000/api/v1")
 
 // STORIES DATA
-let stories // we will set this in server.get (for index action)
-let currentStoryId = 1 // we will use this as input in server.get (for show action)
-let storyToShow = {} // we will set this in server.get (for show action)
-let newStory = {} // we will set this in server.post (for create action)
-let editedStory = {} // we will use this as input in server.patch (for update action)
 let storyToDeleteId // we will use this as input in server.delete (for destroy action)
 
 // COMMENTS DATA
-let comments // we will set this in server.get (for index action)
-let currentCommentId = 1 // we will use this as input in server.get (for show action)
-let commentToShow = {} // we will set this in server.get (for show action)
-let newComment = {} // we will set this in server.post (for create action)
-let editedComment = {} // we will use this as input in server.patch (for update action)
+let editedStoryComment = {} // we will use this as input in server.patch (for update action)
 
 
-// // STORIES API REQUESTS
-// railsApiServer.get('/stories')
-//     .then(function(result) {
-//         update(function() {
-//             stories = result
-//         })
-//     })
+// STORIES API REQUESTS
+const getStories = function() {
+    return railsApiServer.get('/stories')
+        .then(function(result) {
+            update(function() {
+                result.forEach(function(story) {
+                    const newStory = new Story(story)
+                })
+            })
+        })
+}
 
-// railsApiServer.get(`/stories/${currentStoryId}`)
-//     .then(function(result) {
-//         update(function() {
-//             storyToShow = result
-//         })
-//     })
+const getCurrentStory = function(id) {
+    return railsApiServer.get(`/stories/${id}`)
+        .then(function(result) {
+            update(function() {
+                currentStory = new Story(result)
+            })
+        })
+}
 
-// railsApiServer.post('/stories', newStory)
-//     .then(function (result) {
-//         update(function () {
-//             newStory.id = result.id;
-//         })
-//     })
+const bookmark = function(story) {
+    return railsApiServer.post('/stories', story)
+        .then(function (result) {
+            update(function () {
+                story.id = result.id;
+            })
+        })
+}
 
-// railsApiServer.patch(`/stories/${editedStory.id}`, editedStory)
+const editStory = function(story) {
+    railsApiServer.patch(`/stories/${story.id}`, story)
+}
 
-// railsApiServer.delete(`/stories/${storyToDeleteId}`);
+const unbookmark = function(story) {
+    railsApiServer.delete(`/stories/${story.id}`);
+}
 
-// // COMMENTS API REQUESTS
-// railsApiServer.get('/comments')
-//     .then(function (result) {
-//         update(function () {
-//             comments = result
-//         })
-//     })
+// STORYCOMMENTS API REQUESTS
+const getStoryComments = function() {
+    return railsApiServer.get('/comments')
+        .then(function (result) {
+            update(function () {
+                result.forEach(function (storyComment) {
+                    const newStoryComment = new StoryComment(storyComment)
+                })
+            })
+        })
+}
 
-// railsApiServer.get(`/comments/${currentCommentId}`)
-//     .then(function (result) {
-//         update(function () {
-//             commentToShow = result
-//         })
-//     })
+const getCurrentStoryComment = function(id) {
+    return railsApiServer.get(`/comments/${id}`)
+        .then(function (result) {
+            update(function () {
+                currentStoryComment = new StoryComment(result);
+            })
+        })
+}
 
-// railsApiServer.post('/comments', newComment)
-//     .then(function(result) {
-//         update(function() {
-//             newComment.id = result.id;
-//         })
-//     })
+const addStoryComment = function(storyComment) {
+    return railsApiServer.post('/comments', storyComment)
+        .then(function(result) {
+            update(function() {
+                storyComment.id = result.id;
+            })
+        })
+}
 
-// railsApiServer.patch(`/comments/${editedComment.id}`, editedComment);
+const  editStoryComment = function(editedStoryComment) {
+    railsApiServer.patch(`/comments/${editedStoryComment.id}`, editedStoryComment);
+}
+
