@@ -49,9 +49,12 @@ const renderNavBar = function() {
   searchButton.addEventListener("click", function(e) {
     e.preventDefault();
     keyword = searchInput.value;
+    if (keyword === "alan") {
+      alert("READ THE ERROR.");
+    }
     newsApiFetch(keyword);
     console.log(keyword_articles);
-    renderKeyList();
+    // renderKeyList()
     searchInput.innerText = "";
   });
 };
