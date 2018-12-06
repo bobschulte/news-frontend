@@ -29,7 +29,7 @@ const fetch_sources = function() {
   });
 };
 
-const fetch_keyword_articles = function(word = "cat") {
+const fetch_keyword_articles = function(word = "xyz") {
   return fetch(`${root}everything?q=${word}&${API_KEY}`, {
     headers: {
       authorization: `Bearer ${API_KEY}`
@@ -39,15 +39,18 @@ const fetch_keyword_articles = function(word = "cat") {
   });
 };
 
-const newsApiFetch = function(word = "cat") {
+const newsApiFetch = function(word = "xyz") {
   fetch_headlines().then(function(response) {
     headlines = response.articles.filter(article => article.urlToImage);
     fetch_sources().then(function(response) {
       sources = response.sources;
       fetch_keyword_articles(word).then(function(response) {
         keyword_articles = response.articles;
-        console.log(response);
-        render();
+        if (word === "xyz") {
+          render();
+        } else {
+          renderKeyList();
+        }
       });
     });
   });
