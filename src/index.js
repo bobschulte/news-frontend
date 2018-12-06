@@ -5,13 +5,13 @@ const publicationsBar = document.querySelector("#bar-publications");
 const trendingBar = document.querySelector("#bar-trending");
 const primaryPage = document.querySelector("#primary-page");
 
-const viewChanger = view()
+const viewChanger = view();
 
 // DATA
 let featuredArticleIndex = 0;
 let currentPublication;
 let keyword;
-let currentView = 'home';
+let currentView = "home";
 let currentStory;
 // let currentStoryComment;
 
@@ -20,14 +20,14 @@ newsApiFetch();
 
 // RENDER FUNCTIONS
 
-const renderNavBar = function () {
+const renderNavBar = function() {
   navBar.innerHTML = "";
   const icon = navBar.appendChild(document.createElement("div"));
   icon.id = "navbar-icon";
   icon.className = "navbar-brand";
   icon.innerText = "NAVBAR ICON HERE";
   icon.addEventListener("click", backToHome);
-  renderSearchBar()
+  renderSearchBar();
 };
 
 //only want these rendered once
@@ -42,19 +42,19 @@ setInterval(function() {
 
 const render = function() {
   getStories().then(function() {
-    renderTrendingBar()
+    renderTrendingBar();
     renderPublicationsBar();
     renderPrimaryPage();
-  })
+  });
 };
 
 const renderTrendingBar = function() {
-  trendingBar.innerHTML = 'My Articles: '
-  const trendingList = trendingBar.appendChild(document.createElement('ul'))
+  trendingBar.innerHTML = "My Articles: ";
+  const trendingList = trendingBar.appendChild(document.createElement("ul"));
   Story.all.forEach(function(story) {
-    renderTrendingStory(story, trendingList)
-  })
-}
+    renderTrendingStory(story, trendingList);
+  });
+};
 
 const renderPublicationsBar = function() {
   publicationsBar.innerHTML = "";
@@ -64,16 +64,19 @@ const renderPublicationsBar = function() {
 };
 
 const renderPrimaryPage = function() {
-    primaryPage.innerHTML = "";
-    switch (currentView) {
-      case 'home':
-      viewChanger.renderHomeView(headlines)
+  primaryPage.innerHTML = "";
+  switch (currentView) {
+    case "home":
+      viewChanger.renderHomeView(headlines);
       break;
-      case 'article':
-      viewChanger.renderArticleView(currentStory)
+    case "article":
+      viewChanger.renderArticleView(currentStory);
       break;
-      case 'search':
-      viewChanger.renderSearchResultsView(keyword_articles)
+    case "keyword search":
+      viewChanger.renderSearchResultsView(keyword_articles);
       break;
-    }
+    case "source search":
+      viewChanger.renderSearchResultsView(sources_articles);
+      break;
+  }
 };
