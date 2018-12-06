@@ -7,10 +7,8 @@ const searchBar = document.querySelector("#search");
 
 // DATA
 let featuredArticleIndex = 0;
-let currentArticle;
 let currentPublication;
 let keyword;
-let databaseStory;
 
 // NOTES
 let currentStory;
@@ -68,7 +66,7 @@ const renderNavBar = function() {
         alert("READ THE ERROR.");
       }
       newsApiFetch(keyword);
-      primaryPage.innerHTML = "";
+      currentStory = null;
     }
   });
 };
@@ -94,10 +92,9 @@ const renderPublication = function(source) {
 
 const renderPrimaryPage = function() {
   primaryPage.innerHTML = "";
-  if (currentArticle) {
-    renderArticle(currentArticle);
+  if (currentStory) {
+    renderArticle(currentStory);
   } else if (keyword) {
-    //to take care of keyword situation
     renderArticleList(keyword_articles);
   } else {
     renderFeature();
@@ -130,7 +127,7 @@ const renderFeature = function() {
     <h1>${configureTitle.call(featuredArticle)}</h1>
   `;
   featureDiv.addEventListener("click", function() {
-    currentArticle = featuredArticle;
+    currentStory = featuredArticle;
     render();
   });
 };
@@ -157,7 +154,7 @@ const renderArticleListItem = function(article, articleList) {
     </div>
    `;
   articleListItem.addEventListener("click", function() {
-    currentArticle = article;
+    currentStory = article;
     render();
   });
 };
@@ -174,18 +171,17 @@ const renderBookmarkButton = function(domElement) {
   );
   bookmarkButton.innerText = "Bookmark Article";
   bookmarkButton.addEventListener("click", function(e) {
-    bookmark(currentArticle).then(function() {
+    bookmark(currentStory).then(function() {
       alert("Story bookmarked!");
-      getCurrentStory(currentArticle.id);
-      currentArticle = currentStory;
-      renderArticle(currentArticle);
+      getCurrentStory(currentStory.id);
+      render();
     });
   });
 };
 
 // HELPER FUNCTIONS
 const backToHome = function() {
-  currentArticle = null;
+  currentStory = null;
   render();
 };
 

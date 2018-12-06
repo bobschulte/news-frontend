@@ -29,8 +29,8 @@ const getCurrentStory = function(id) {
 const bookmark = function(story) {
   return railsApiServer.post(`${storiesPath}`, story).then(function(result) {
     update(function() {
-      story.id = result.id;
-      currentArticle.id = result.id;
+      // story.id = result.id;
+      currentStory = result;
     });
   });
 };
