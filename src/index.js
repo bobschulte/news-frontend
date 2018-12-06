@@ -11,10 +11,25 @@ let currentArticle;
 let currentPublication;
 let keyword;
 
+// NOTES
+let currentStory;
+// getStories() is now available here
+// getCurrentStory(id) is now available here
+// bookmark(story) is available 
+// editStory(story) is available
+// unbookmark(story) is available
+
+let currentStoryComment;
+// getStoryComments() is now available here
+// getCurrentStoryComment(id) is now available here
+// addStoryComment(storyComment) is now available
+// editStoryComment(storyComment) is now available
+
+
 // FETCH FROM SERVER
 newsApiFetch();
 
-// RENDER FUNCTIONS
+// RENDER FUNCTIONS       
 
 // setInterval(function() {
 //   featuredArticleIndex < 19
