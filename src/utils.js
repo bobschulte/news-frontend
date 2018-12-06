@@ -5,11 +5,24 @@ const configureTitle = function () {
     .join(" - ");
 }
 
-const ajax = function (root) {
+const update = function (updater) {
+  updater()
+  // render()
+}
+
+const ajax = function (root, api_key) {
   return {
     get(path) {
-      return fetch(`${root}${path}`)
-        .then(resp => resp.json())
+      if (api_key) {
+        return fetch(`${root}${path}`, {
+          headers: {
+            authorization: `Bearer ${API_KEY}`
+          }
+        }).then(resp => resp.json());
+      } else {
+        return fetch(`${root}${path}`)
+          .then(resp => resp.json());
+      }
     },
     patch(path, body) {
       return fetch(`${root}${path}`, {
@@ -38,9 +51,4 @@ const ajax = function (root) {
         .then(resp => resp.json())
     }
   }
-}
-
-const update = function(updater) {
-  updater()
-  // render()
 }
