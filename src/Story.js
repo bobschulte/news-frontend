@@ -5,6 +5,7 @@ class Story {
     this.urlToImage = data.urlToImage;
     this.content = data.content;
     this.url = data.url;
+    this.comments = data.comments
     Story.all.push(this);
   }
 }
