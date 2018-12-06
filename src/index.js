@@ -15,7 +15,7 @@ let keyword;
 let currentStory;
 // getStories() is now available here
 // getCurrentStory(id) is now available here
-// bookmark(story) is available 
+// bookmark(story) is available
 // editStory(story) is available
 // unbookmark(story) is available
 
@@ -25,23 +25,21 @@ let currentStoryComment;
 // addStoryComment(storyComment) is now available
 // editStoryComment(storyComment) is now available
 
-
 // FETCH FROM SERVER
 newsApiFetch();
 
-// RENDER FUNCTIONS       
+// RENDER FUNCTIONS
 
-// setInterval(function() {
-//   featuredArticleIndex < 19
-//     ? featuredArticleIndex++
-//     : (featuredArticleIndex = 0);
-//   render();
-// }, 10000);
+setInterval(function() {
+  featuredArticleIndex < 19
+    ? featuredArticleIndex++
+    : (featuredArticleIndex = 0);
+  render();
+}, 5000);
 
 const render = function() {
-  renderNavBar();
-  renderPublicationsBar();
   // renderTrendingBar()
+  renderPublicationsBar();
   renderPrimaryPage();
 };
 
@@ -54,7 +52,6 @@ const renderNavBar = function() {
   icon.addEventListener("click", backToHome);
 
   //search section of navBar
-
   searchBar.innerHTML = "";
   const searchForm = searchBar.appendChild(document.createElement("form"));
   const searchInput = searchForm.appendChild(document.createElement("input"));
@@ -63,14 +60,15 @@ const renderNavBar = function() {
   searchButton.innerText = "Search";
   searchButton.addEventListener("click", function(e) {
     e.preventDefault();
-    keyword = searchInput.value;
-    if (keyword === "alan") {
-      alert("READ THE ERROR.");
+    if (searchInput.value) {
+      keyword = searchInput.value;
+      searchInput.value = "";
+      if (keyword === "alan") {
+        alert("READ THE ERROR.");
+      }
+      newsApiFetch(keyword);
+      primaryPage.innerHTML = "";
     }
-    newsApiFetch(keyword);
-    console.log(keyword_articles);
-    // renderKeyList()
-    searchInput.innerText = "";
   });
 };
 
@@ -97,19 +95,25 @@ const renderPrimaryPage = function() {
   primaryPage.innerHTML = "";
   if (currentArticle) {
     renderArticle(currentArticle);
+  } else if (keyword) {
+    //to take care of keyword situation
+    renderArticleList(keyword_articles);
   } else {
     renderFeature();
-    renderArticleList();
+    renderArticleList(headlines);
   }
 };
 
 const renderArticle = function(article) {
+  keyword = null;
   primaryPage.innerHTML = `
   <h1>${configureTitle.call(article)}</h1>
   <img class="feature-img" src="${
     article.urlToImage
   }" alt="generic-pic" width="832px">
-  <div>${article.content}</div>
+  <div>${article.content.slice(0, 260)}</div>
+  <p>To read full article, click
+  <a href=${article.url} target="_blank">this link</a>.</p>
   `;
   renderBackButton(primaryPage);
 };
@@ -129,43 +133,16 @@ const renderFeature = function() {
   });
 };
 
-const renderArticleList = function() {
+const renderArticleList = function(articles) {
   const articleList = primaryPage
     .appendChild(document.createElement("div"))
     .appendChild(document.createElement("ul"));
   articleList.setAttribute("class", "list-unstyled");
-  headlines.forEach(function(article) {
+  articles.forEach(function(article) {
     renderArticleListItem(article, articleList);
   });
 };
-//key list stuff begin
-const renderKeyList = function() {
-  primaryPage.innerHTML = "";
-  const keyList = primaryPage
-    .appendChild(document.createElement("div"))
-    .appendChild(document.createElement("ul"));
-  keyList.setAttribute("class", "list-unstyled");
-  keyword_articles.forEach(function(article) {
-    renderKeyListItem(article, keyList);
-  });
-};
 
-const renderKeyListItem = function(article, keyList) {
-  const keyListItem = keyList.appendChild(document.createElement("li"));
-  keyListItem.setAttribute("class", "media");
-  keyListItem.innerHTML = `
-    <img class="mr-1" src="${
-      article.urlToImage
-    }" alt="generic-pic" width="96px">
-    <div class="media-body">
-      <h5 class="mt-0 mb-1">${configureTitle.call(article)}</h5>
-    </div>
-   `;
-  keyListItem.addEventListener("click", function() {
-    renderArticle(article);
-  });
-};
-//key list stuff end
 const renderArticleListItem = function(article, articleList) {
   const articleListItem = articleList.appendChild(document.createElement("li"));
   articleListItem.setAttribute("class", "media");
@@ -190,11 +167,10 @@ const renderBackButton = function(domElement) {
 };
 
 // HELPER FUNCTIONS
-const resetCurrentArticle = function() {
-  currentArticle = null;
-};
-
 const backToHome = function() {
-  resetCurrentArticle();
+  currentArticle = null;
   render();
 };
+
+//only want these rendered once
+renderNavBar();
