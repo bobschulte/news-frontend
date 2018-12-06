@@ -28,12 +28,14 @@ const newsApiFetch = function(word = "xyz") {
     fetch_sources().then(function(response) {
       sources = response.sources;
       fetch_keyword_articles(word).then(function(response) {
-        keyword_articles = response.articles;
-        if (word === "xyz") {
-          render();
-        } else {
-          renderArticleList(keyword_articles);
-        }
+        keyword_articles = response.articles.filter(
+          article =>
+            article.urlToImage &&
+            article.title &&
+            article.url &&
+            article.content
+        );
+        render();
       });
     });
   });
