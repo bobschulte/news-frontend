@@ -1,43 +1,28 @@
-//will turn these into one function later
+// SET UP A NEWS API SERVER OBJECT
+const newsApiServer = ajax("https://newsapi.org/v2", API_KEY);
 
-const root = "https://newsapi.org/v2/";
-const headlines_path = "top-headlines?language=en&";
-const sources_path = "sources?country=us&language=en&";
-// const everything_path = `everything?q=${keyword}&`;
+// NEWS API PATHS
+const headlinesPath = "/top-headlines?language=en&";
+const sourcesPath = "/sources?country=us&language=en&";
+const keywordPath = "/everything?q=";
 
+// DATA
 let headlines;
 let sources;
 let keyword_articles;
 
+// API FETCHES
 const fetch_headlines = function() {
-  return fetch(`${root}${headlines_path}${API_KEY}`, {
-    headers: {
-      authorization: `Bearer ${API_KEY}`
-    }
-  }).then(function(response) {
-    return response.json();
-  });
-};
+  return newsApiServer.get(`${headlinesPath}${API_KEY}`)
+}
 
 const fetch_sources = function() {
-  return fetch(`${root}${sources_path}${API_KEY}`, {
-    headers: {
-      authorization: `Bearer ${API_KEY}`
-    }
-  }).then(function(response) {
-    return response.json();
-  });
-};
+  return newsApiServer.get(`${sourcesPath}${API_KEY}`)
+}
 
 const fetch_keyword_articles = function(word = "xyz") {
-  return fetch(`${root}everything?q=${word}&${API_KEY}`, {
-    headers: {
-      authorization: `Bearer ${API_KEY}`
-    }
-  }).then(function(response) {
-    return response.json();
-  });
-};
+  return newsApiServer.get(`${keywordPath}${word}&${API_KEY}`)
+}
 
 const newsApiFetch = function(word = "xyz") {
   fetch_headlines().then(function(response) {
