@@ -22,11 +22,11 @@ const fetch_sources = function() {
   return newsApiServer.get(`/sources?country=us&language=en&${API_KEY}`);
 };
 
-const fetch_keyword_articles = function(word = "xyz") {
+const fetch_keyword_articles = function(word) {
   return newsApiServer.get(`/everything?q=${word}&${API_KEY}`);
 };
 
-const fetch_sources_articles = function(news_source = "xyz") {
+const fetch_sources_articles = function(news_source) {
   return newsApiServer.get(
     `/everything?language=en&sources=${news_source}&${API_KEY}`
   );

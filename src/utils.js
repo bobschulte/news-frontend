@@ -5,11 +5,6 @@ const configureTitle = function () {
     .join(" - ");
 }
 
-const update = function (updater) {
-  updater()
-  // render()
-}
-
 const ajax = function (root, api_key) {
   return {
     get(path) {

@@ -19,7 +19,6 @@ let currentStory;
 newsApiFetch();
 
 // RENDER FUNCTIONS
-
 const renderNavBar = function() {
   navBar.innerHTML = "";
   const icon = navBar.appendChild(document.createElement("div"));
@@ -32,13 +31,6 @@ const renderNavBar = function() {
 
 //only want these rendered once
 renderNavBar();
-
-setInterval(function() {
-  featuredArticleIndex < headlines.length - 1
-    ? featuredArticleIndex++
-    : (featuredArticleIndex = 0);
-  render();
-}, 5000);
 
 const render = function() {
   getStories().then(function() {
@@ -68,15 +60,24 @@ const renderPrimaryPage = function() {
   switch (currentView) {
     case "home":
       viewChanger.renderHomeView(headlines);
+      featureTimer = setInterval(function () {
+        featuredArticleIndex < headlines.length - 1
+          ? featuredArticleIndex++
+          : (featuredArticleIndex = 0);
+        render();
+      }, 5000);
       break;
     case "article":
       viewChanger.renderArticleView(currentStory);
+      clearInterval(featureTimer)
       break;
     case "keyword search":
       viewChanger.renderSearchResultsView(keyword_articles);
+      clearInterval(featureTimer)
       break;
     case "source search":
       viewChanger.renderSearchResultsView(sources_articles);
+      clearInterval(featureTimer)
       break;
   }
 };
