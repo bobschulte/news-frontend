@@ -75,13 +75,11 @@ const renderArticle = function(article) {
     <a href=${article.url} target="_blank">this link</a>.</p>
     `;
 
-  if (article.id) {
-    // renderCommentForm()
-    // renderStoryComments(article)
-  } else {
     renderBookmarkButton(primaryPage);
+    renderBackButton(primaryPage);
+  if (article.id) {
+    renderCommentSection(article)
   }
-  renderBackButton(primaryPage);
 };
 
 const renderBackButton = function(domElement) {
@@ -94,15 +92,64 @@ const renderBookmarkButton = function(domElement) {
   const bookmarkButton = domElement.appendChild(
     document.createElement("button")
   );
-  bookmarkButton.innerText = "Bookmark Article";
-  bookmarkButton.addEventListener("click", function(e) {
-    bookmark(currentStory).then(function() {
-      alert("Story bookmarked!");
-      getCurrentStory(currentStory.id);
-      render();
+  if (currentStory.id) {
+    bookmarkButton.innerText = "Unbookmark Article";
+    bookmarkButton.addEventListener("click", function(e) {
+      unbookmark(currentStory).then(function() {
+        alert("Story unbookmarked!");
+        currentStory = null
+        currentView = "home"
+        render();
+      });
     });
-  });
+  } else {
+    bookmarkButton.innerText = "Bookmark Article";
+    bookmarkButton.addEventListener("click", function(e) {
+      bookmark(currentStory).then(function() {
+        alert("Story bookmarked!");
+        getCurrentStory(currentStory.id);
+        render();
+      });
+    });
+  }
 };
+
+const renderCommentSection = function(story) {
+  renderCommentForm(story)
+  renderComments(story)
+}
+
+const renderCommentForm = function(story) {
+  const form = primaryPage.appendChild(document.createElement('form'))
+  form.innerHTML = `
+    <br/>
+    <input id="comment-input" placeholder="Enter Comment Here" type="text">
+    <button type="submit">Add Comment</button>
+  `
+  form.addEventListener('submit', function(e) {
+    e.preventDefault()
+    const commentInput = document.querySelector('#comment-input')
+    const commentText = commentInput.value
+    story.comments.push({description: commentText})
+    commentInput.value = ''
+    editStory(story.id, {
+      title: story.title,
+      content: story.content,
+      url: story.url,
+      urlToImage: story.urlToImage,
+      comments_attributes: story.comments
+    })
+    render()
+  })
+}
+
+const renderComments = function(story) {
+  const commentList = primaryPage.appendChild(document.createElement('ul'))
+  story.comments.forEach(function(comment) {
+    const commentItem = commentList.appendChild(document.createElement('li'))
+    commentItem.innerText = `${comment.description}`
+  })
+}
 
 const renderTrendingStory = function(story, list) {
   const storyTitle = list.appendChild(document.createElement("li"));
