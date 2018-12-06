@@ -9,12 +9,11 @@ const storyCommentsPath = "/comments";
 const getStories = function() {
   return railsApiServer.get(`${storiesPath}`).then(function(result) {
     update(function() {
+      Story.all = []
       result.forEach(function(story) {
         const newStory = new Story(story);
       });
     });
-    //renderStories() ???
-    //renderArticleList(stories) ???
   });
 };
 

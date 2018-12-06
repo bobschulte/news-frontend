@@ -70,11 +70,17 @@ const renderArticle = function (article) {
     <img class="feature-img" src="${
         article.urlToImage
         }" alt="generic-pic" width="832px">
-  <div>${article.content.slice(0, 260)}</div>
-  <p>To read full article, click
-  <a href=${article.url} target="_blank">this link</a>.</p>
-  `;
-    renderBookmarkButton(primaryPage);
+    <div>${article.content.slice(0, 260)}</div>
+    <p>To read full article, click
+    <a href=${article.url} target="_blank">this link</a>.</p>
+    `;
+
+    if (article.id) {
+        // renderCommentForm()
+        // renderStoryComments(article)
+    } else {
+        renderBookmarkButton(primaryPage);
+    }
     renderBackButton(primaryPage);
 };
 
@@ -97,6 +103,16 @@ const renderBookmarkButton = function (domElement) {
         });
     });
 };
+
+const renderTrendingStory = function (story, list) {
+    const storyTitle = list.appendChild(document.createElement('li'))
+    storyTitle.innerHTML = story.title
+    storyTitle.addEventListener('click', function () {
+        currentView = 'article'
+        currentStory = story
+        render()
+    })
+}
 
 const renderPublication = function (source) {
     const publication = publicationsBar.appendChild(document.createElement("p"));

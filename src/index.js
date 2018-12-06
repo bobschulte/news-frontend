@@ -41,14 +41,20 @@ setInterval(function() {
 }, 5000);
 
 const render = function() {
-  // renderTrendingBar()
-  renderPublicationsBar();
-  renderPrimaryPage();
+  getStories().then(function() {
+    renderTrendingBar()
+    renderPublicationsBar();
+    renderPrimaryPage();
+  })
 };
 
-// const renderTrendingBar = function() {
-  
-// }
+const renderTrendingBar = function() {
+  trendingBar.innerHTML = 'My Articles: '
+  const trendingList = trendingBar.appendChild(document.createElement('ul'))
+  Story.all.forEach(function(story) {
+    renderTrendingStory(story, trendingList)
+  })
+}
 
 const renderPublicationsBar = function() {
   publicationsBar.innerHTML = "";
