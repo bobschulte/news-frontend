@@ -1,10 +1,3 @@
-const configureTitle = function () {
-  return this.title
-    .split(" - ")
-    .reverse()
-    .join(" - ");
-}
-
 const ajax = function (root, api_key) {
   return {
     get(path) {

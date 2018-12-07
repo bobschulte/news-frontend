@@ -13,8 +13,15 @@ let currentPublication;
 let keyword;
 let currentView = "home";
 let currentStory;
-// let currentStoryComment;
+let featureTimer
 
+featureTimer = setInterval(function () {
+  featuredArticleIndex < headlines.length - 1
+    ? featuredArticleIndex++
+    : (featuredArticleIndex = 0);
+  render();
+}, 5000);
+  
 // FETCH FROM SERVER
 newsApiFetch();
 
@@ -60,12 +67,6 @@ const renderPrimaryPage = function() {
   switch (currentView) {
     case "home":
       viewChanger.renderHomeView(headlines);
-      featureTimer = setInterval(function () {
-        featuredArticleIndex < headlines.length - 1
-          ? featuredArticleIndex++
-          : (featuredArticleIndex = 0);
-        render();
-      }, 5000);
       break;
     case "article":
       viewChanger.renderArticleView(currentStory);
