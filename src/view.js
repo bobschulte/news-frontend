@@ -16,6 +16,9 @@ const view = function() {
 const backToHome = function() {
   currentView = "home";
   currentStory = null;
+  keyword = null;
+  selectedSource = null;
+
   render();
   featureTimer = setInterval(function() {
     featuredArticleIndex < headlines.length - 1
@@ -23,6 +26,16 @@ const backToHome = function() {
       : (featuredArticleIndex = 0);
     render();
   }, 5000);
+};
+
+const backToResults = function() {
+  if (keyword) {
+    currentView = "keyword search";
+  } else {
+    currentView = "source search";
+  }
+  currentStory = null;
+  render();
 };
 
 const renderFeature = function() {
@@ -76,7 +89,6 @@ const renderArticle = function(article) {
       article = storyObject;
     }
   });
-  keyword = null;
   primaryPage.innerHTML = `
     <h1>${article.title}</h1>
     <img class="feature-img" src="${
@@ -95,8 +107,12 @@ const renderArticle = function(article) {
 
 const renderBackButton = function(domElement) {
   const backButton = domElement.appendChild(document.createElement("button"));
-  backButton.innerText = "Back to Home Page";
-  backButton.addEventListener("click", backToHome);
+  backButton.innerText = "Back";
+  if (keyword || selectedSource) {
+    backButton.addEventListener("click", backToResults);
+  } else {
+    backButton.addEventListener("click", backToHome);
+  }
 };
 
 const renderBookmarkButton = function(domElement) {
@@ -173,7 +189,9 @@ const renderPublication = function(source) {
   publication.innerText = `${source.name}`;
   publication.addEventListener("click", function() {
     currentView = "source search";
-    sourceFetch(source.name);
+    selectedSource = source.name;
+    keyword = null;
+    sourceFetch(selectedSource);
   });
 };
 
@@ -190,6 +208,7 @@ const renderSearchButton = function(searchInput, searchForm) {
   searchButton.innerText = "Search";
   searchButton.addEventListener("click", function(e) {
     e.preventDefault();
+    source = null;
     if (searchInput.value) {
       keyword = searchInput.value;
       searchInput.value = "";
