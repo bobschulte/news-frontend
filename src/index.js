@@ -50,14 +50,15 @@ const render = function() {
 
 const renderTrendingBar = function() {
   trendingBar.innerHTML = "My Articles: ";
-  const trendingList = trendingBar.appendChild(document.createElement("ul"));
+  const trendingList = trendingBar.appendChild(document.createElement("div"));
+  trendingList.className = "list-group list-group-flush"
   Story.all.forEach(function(story) {
     renderTrendingStory(story, trendingList);
   });
 };
 
 const renderPublicationsBar = function() {
-  publicationsBar.innerHTML = "";
+  publicationsBar.innerHTML = "Sources: ";
   sources.forEach(function(source) {
     renderPublication(source);
   });
