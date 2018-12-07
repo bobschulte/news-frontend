@@ -175,7 +175,9 @@ const renderComments = function(story) {
 };
 
 const renderTrendingStory = function(story, list) {
-  const storyTitle = list.appendChild(document.createElement("li"));
+  const storyTitle = list.appendChild(document.createElement("button"));
+  storyTitle.className = "list-group-item"
+  storyTitle.dataset.toggle = "list"
   storyTitle.innerHTML = story.title;
   storyTitle.addEventListener("click", function() {
     currentView = "article";
@@ -185,7 +187,9 @@ const renderTrendingStory = function(story, list) {
 };
 
 const renderPublication = function(source) {
-  const publication = publicationsBar.appendChild(document.createElement("p"));
+  const publication = publicationsBar.appendChild(document.createElement("button"));
+  publication.className = "list-group-item"
+  publication.dataset.toggle = "list"
   publication.innerText = `${source.name}`;
   publication.addEventListener("click", function() {
     currentView = "source search";

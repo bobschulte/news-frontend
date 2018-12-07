@@ -39,3 +39,9 @@ div.navbar-brand {
 .navbar {
   background: #d16014;
 }
+
+button.list-group-item {
+  padding: 12% 0;
+  background-color: transparent;
+  font-family: "Bungee";
+}
