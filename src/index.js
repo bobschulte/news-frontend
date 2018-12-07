@@ -49,7 +49,7 @@ const render = function() {
 };
 
 const renderTrendingBar = function() {
-  trendingBar.innerHTML = "My Articles: ";
+  trendingBar.innerHTML = "<h4>My Bookmarks</h4>";
   const trendingList = trendingBar.appendChild(document.createElement("div"));
   trendingList.className = "list-group list-group-flush"
   Story.all.forEach(function(story) {
@@ -58,7 +58,7 @@ const renderTrendingBar = function() {
 };
 
 const renderPublicationsBar = function() {
-  publicationsBar.innerHTML = "Sources: ";
+  publicationsBar.innerHTML = "<h4>Sources</h4>";
   sources.forEach(function(source) {
     renderPublication(source);
   });
