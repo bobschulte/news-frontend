@@ -11,6 +11,7 @@ const viewChanger = view();
 let featuredArticleIndex = 0;
 let currentPublication;
 let keyword;
+let selectedSourcesource;
 let currentView = "home";
 let currentStory;
 let featureTimer;
