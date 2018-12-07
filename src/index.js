@@ -13,15 +13,15 @@ let currentPublication;
 let keyword;
 let currentView = "home";
 let currentStory;
-let featureTimer
+let featureTimer;
 
-featureTimer = setInterval(function () {
+featureTimer = setInterval(function() {
   featuredArticleIndex < headlines.length - 1
     ? featuredArticleIndex++
     : (featuredArticleIndex = 0);
   render();
 }, 5000);
-  
+
 // FETCH FROM SERVER
 newsApiFetch();
 
@@ -31,7 +31,7 @@ const renderNavBar = function() {
   const icon = navBar.appendChild(document.createElement("div"));
   icon.id = "navbar-icon";
   icon.className = "navbar-brand";
-  icon.innerText = "NAVBAR ICON HERE";
+  icon.innerText = "INDB";
   icon.addEventListener("click", backToHome);
   renderSearchBar();
 };
@@ -70,15 +70,15 @@ const renderPrimaryPage = function() {
       break;
     case "article":
       viewChanger.renderArticleView(currentStory);
-      clearInterval(featureTimer)
+      clearInterval(featureTimer);
       break;
     case "keyword search":
       viewChanger.renderSearchResultsView(keyword_articles);
-      clearInterval(featureTimer)
+      clearInterval(featureTimer);
       break;
     case "source search":
       viewChanger.renderSearchResultsView(sources_articles);
-      clearInterval(featureTimer)
+      clearInterval(featureTimer);
       break;
   }
 };

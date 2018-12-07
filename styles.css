@@ -1,7 +1,32 @@
 img.mr-1 {
-  width: '96px';
+  width: "96px";
 }
 
 img.feature-img {
-  width: '832px';
+  width: 90%;
+  height: 400px;
 }
+
+div.col-2 {
+  height: 100vh;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+}
+
+div.col-8 {
+  height: 100vh;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+}
+
+div.col {
+  height: 100vh;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+}
+
+/* div.navbar-brand {
+} */
