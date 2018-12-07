@@ -45,3 +45,7 @@ button.list-group-item {
   background-color: transparent;
   font-family: "Bungee";
 }
+
+h4 {
+  text-align: center;
+}
