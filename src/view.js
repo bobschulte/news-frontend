@@ -17,6 +17,12 @@ const backToHome = function() {
   currentView = "home";
   currentStory = null;
   render();
+  featureTimer = setInterval(function () {
+    featuredArticleIndex < headlines.length - 1
+      ? featuredArticleIndex++
+      : (featuredArticleIndex = 0);
+    render();
+  }, 5000);
 };
 
 const renderFeature = function() {
@@ -26,7 +32,7 @@ const renderFeature = function() {
     <img class="feature-img" src="${
       featuredArticle.urlToImage
     }" alt="generic-pic" width="832px">
-    <h1>${configureTitle.call(featuredArticle)}</h1>
+    <h1>${featuredArticle.title}</h1>
         `;
   featureDiv.addEventListener("click", function() {
     currentView = "article";
@@ -53,7 +59,7 @@ const renderArticleListItem = function(article, articleList) {
       article.urlToImage
     } " alt="generic-pic" width="96px">
     <div class="media-body">
-    <h5 class="mt-0 mb-1">${configureTitle.call(article)}</h5>
+    <h5 class="mt-0 mb-1">${article.title}</h5>
     </div>
     `;
   articleListItem.addEventListener("click", function() {
@@ -66,7 +72,7 @@ const renderArticleListItem = function(article, articleList) {
 const renderArticle = function(article) {
   keyword = null;
   primaryPage.innerHTML = `
-    <h1>${configureTitle.call(article)}</h1>
+    <h1>${article.title}</h1>
     <img class="feature-img" src="${
       article.urlToImage
     }" alt="generic-pic" width="832px">
@@ -97,8 +103,7 @@ const renderBookmarkButton = function(domElement) {
     bookmarkButton.addEventListener("click", function(e) {
       unbookmark(currentStory).then(function() {
         alert("Story unbookmarked!");
-        currentStory = null
-        currentView = "home"
+        backToHome()
         render();
       });
     });
