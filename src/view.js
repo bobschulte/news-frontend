@@ -17,7 +17,7 @@ const backToHome = function() {
   currentView = "home";
   currentStory = null;
   render();
-  featureTimer = setInterval(function () {
+  featureTimer = setInterval(function() {
     featuredArticleIndex < headlines.length - 1
       ? featuredArticleIndex++
       : (featuredArticleIndex = 0);
@@ -70,6 +70,12 @@ const renderArticleListItem = function(article, articleList) {
 };
 
 const renderArticle = function(article) {
+  Story.all.find(function(storyObject) {
+    if (storyObject.url === article.url) {
+      currentStory = storyObject;
+      article = storyObject;
+    }
+  });
   keyword = null;
   primaryPage.innerHTML = `
     <h1>${article.title}</h1>
@@ -80,11 +86,10 @@ const renderArticle = function(article) {
     <p>To read full article, click
     <a href=${article.url} target="_blank">this link</a>.</p>
     `;
-
-    renderBookmarkButton(primaryPage);
-    renderBackButton(primaryPage);
+  renderBookmarkButton(primaryPage);
+  renderBackButton(primaryPage);
   if (article.id) {
-    renderCommentSection(article)
+    renderCommentSection(article);
   }
 };
 
@@ -102,8 +107,7 @@ const renderBookmarkButton = function(domElement) {
     bookmarkButton.innerText = "Unbookmark Article";
     bookmarkButton.addEventListener("click", function(e) {
       unbookmark(currentStory).then(function() {
-        alert("Story unbookmarked!");
-        backToHome()
+        backToHome();
         render();
       });
     });
@@ -111,7 +115,6 @@ const renderBookmarkButton = function(domElement) {
     bookmarkButton.innerText = "Bookmark Article";
     bookmarkButton.addEventListener("click", function(e) {
       bookmark(currentStory).then(function() {
-        alert("Story bookmarked!");
         getCurrentStory(currentStory.id);
         render();
       });
@@ -120,40 +123,40 @@ const renderBookmarkButton = function(domElement) {
 };
 
 const renderCommentSection = function(story) {
-  renderCommentForm(story)
-  renderComments(story)
-}
+  renderCommentForm(story);
+  renderComments(story);
+};
 
 const renderCommentForm = function(story) {
-  const form = primaryPage.appendChild(document.createElement('form'))
+  const form = primaryPage.appendChild(document.createElement("form"));
   form.innerHTML = `
     <br/>
     <input id="comment-input" placeholder="Enter Comment Here" type="text">
     <button type="submit">Add Comment</button>
-  `
-  form.addEventListener('submit', function(e) {
-    e.preventDefault()
-    const commentInput = document.querySelector('#comment-input')
-    const commentText = commentInput.value
-    story.comments.push({description: commentText})
-    commentInput.value = ''
+  `;
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const commentInput = document.querySelector("#comment-input");
+    const commentText = commentInput.value;
+    story.comments.push({ description: commentText });
+    commentInput.value = "";
     editStory(story.id, {
       title: story.title,
       content: story.content,
       url: story.url,
       urlToImage: story.urlToImage,
-      comments_attributes: [{description: commentText}]
-    }).then(render)
-  })
-}
+      comments_attributes: [{ description: commentText }]
+    }).then(render);
+  });
+};
 
 const renderComments = function(story) {
-  const commentList = primaryPage.appendChild(document.createElement('ul'))
+  const commentList = primaryPage.appendChild(document.createElement("ul"));
   story.comments.forEach(function(comment) {
-    const commentItem = commentList.appendChild(document.createElement('li'))
-    commentItem.innerText = `${comment.description}`
-  })
-}
+    const commentItem = commentList.appendChild(document.createElement("li"));
+    commentItem.innerText = `${comment.description}`;
+  });
+};
 
 const renderTrendingStory = function(story, list) {
   const storyTitle = list.appendChild(document.createElement("li"));
