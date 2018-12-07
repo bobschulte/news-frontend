@@ -90,7 +90,7 @@ const renderArticle = function(article) {
     }
   });
   primaryPage.innerHTML = `
-    <h1>${article.title}</h1>
+    <h1 class="headline">${article.title}</h1>
     <img class="feature-img" src="${
       article.urlToImage
     }" alt="generic-pic" width="832px">
