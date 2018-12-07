@@ -32,7 +32,7 @@ const renderNavBar = function() {
   const icon = navBar.appendChild(document.createElement("div"));
   icon.id = "navbar-icon";
   icon.className = "navbar-brand";
-  icon.innerText = "INDB";
+  icon.innerHTML = "INDB <h5><i>The Internet News Database</i></h5>";
   icon.addEventListener("click", backToHome);
   renderSearchBar();
 };
@@ -51,7 +51,7 @@ const render = function() {
 const renderTrendingBar = function() {
   trendingBar.innerHTML = "<h4>My Bookmarks</h4>";
   const trendingList = trendingBar.appendChild(document.createElement("div"));
-  trendingList.className = "list-group list-group-flush"
+  trendingList.className = "list-group list-group-flush";
   Story.all.forEach(function(story) {
     renderTrendingStory(story, trendingList);
   });
