@@ -49,3 +49,18 @@ button.list-group-item {
 h4 {
   text-align: center;
 }
+
+h5.mt-0 {
+  font-family: "Bungee";
+}
+
+h1.headline {
+  font-family: "Bungee";
+  font-weight: bold;
+  text-align: center;
+}
+img.feature-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

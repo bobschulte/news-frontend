@@ -45,7 +45,7 @@ const renderFeature = function() {
     <img class="feature-img" src="${
       featuredArticle.urlToImage
     }" alt="generic-pic" width="832px">
-    <h1>${featuredArticle.title}</h1>
+    <h1 class="headline">${featuredArticle.title}</h1>
         `;
   featureDiv.addEventListener("click", function() {
     currentView = "article";
@@ -108,6 +108,8 @@ const renderArticle = function(article) {
 const renderBackButton = function(domElement) {
   const backButton = domElement.appendChild(document.createElement("button"));
   backButton.innerText = "Back";
+  backButton.className = "btn btn-dark";
+
   if (keyword || selectedSource) {
     backButton.addEventListener("click", backToResults);
   } else {
@@ -119,8 +121,9 @@ const renderBookmarkButton = function(domElement) {
   const bookmarkButton = domElement.appendChild(
     document.createElement("button")
   );
+  bookmarkButton.className = "btn btn-dark";
   if (currentStory.id) {
-    bookmarkButton.innerText = "Unbookmark Article";
+    bookmarkButton.innerHTML = "Unbookmark Article";
     bookmarkButton.addEventListener("click", function(e) {
       unbookmark(currentStory).then(function() {
         backToHome();
@@ -148,7 +151,7 @@ const renderCommentForm = function(story) {
   form.innerHTML = `
     <br/>
     <input id="comment-input" placeholder="Enter Comment Here" type="text">
-    <button type="submit">Add Comment</button>
+    <button class="btn btn-dark" type="submit">Add Comment</button>
   `;
   form.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -176,8 +179,8 @@ const renderComments = function(story) {
 
 const renderTrendingStory = function(story, list) {
   const storyTitle = list.appendChild(document.createElement("button"));
-  storyTitle.className = "list-group-item"
-  storyTitle.dataset.toggle = "list"
+  storyTitle.className = "list-group-item";
+  storyTitle.dataset.toggle = "list";
   storyTitle.innerHTML = story.title;
   storyTitle.addEventListener("click", function() {
     currentView = "article";
@@ -187,9 +190,11 @@ const renderTrendingStory = function(story, list) {
 };
 
 const renderPublication = function(source) {
-  const publication = publicationsBar.appendChild(document.createElement("button"));
-  publication.className = "list-group-item"
-  publication.dataset.toggle = "list"
+  const publication = publicationsBar.appendChild(
+    document.createElement("button")
+  );
+  publication.className = "list-group-item";
+  publication.dataset.toggle = "list";
   publication.innerText = `${source.name}`;
   publication.addEventListener("click", function() {
     currentView = "source search";
@@ -203,13 +208,14 @@ const renderSearchBar = function() {
   searchBar.innerHTML = "";
   const searchForm = searchBar.appendChild(document.createElement("form"));
   const searchInput = searchForm.appendChild(document.createElement("input"));
-  searchInput.placeholder = "enter keyword";
+  searchInput.placeholder = "Enter Keyword";
   renderSearchButton(searchInput, searchForm);
 };
 
 const renderSearchButton = function(searchInput, searchForm) {
   const searchButton = searchForm.appendChild(document.createElement("button"));
   searchButton.innerText = "Search";
+  searchButton.className = "btn btn-dark";
   searchButton.addEventListener("click", function(e) {
     e.preventDefault();
     source = null;
