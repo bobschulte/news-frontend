@@ -142,9 +142,8 @@ const renderCommentForm = function(story) {
       content: story.content,
       url: story.url,
       urlToImage: story.urlToImage,
-      comments_attributes: story.comments
-    })
-    render()
+      comments_attributes: [{description: commentText}]
+    }).then(render)
   })
 }
 
