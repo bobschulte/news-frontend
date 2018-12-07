@@ -4,7 +4,7 @@ img.mr-1 {
 
 img.feature-img {
   width: 90%;
-  height: 400px;
+  height: 500px;
 }
 
 div.col-2 {
@@ -12,6 +12,7 @@ div.col-2 {
   overflow-y: scroll;
   top: 0;
   bottom: 0;
+  background: #bbce8a;
 }
 
 div.col-8 {
@@ -26,7 +27,15 @@ div.col {
   overflow-y: scroll;
   top: 0;
   bottom: 0;
+  background: #bbce8a;
 }
 
-/* div.navbar-brand {
-} */
+div.navbar-brand {
+  font-weight: bold;
+  font-size: 2.5em;
+  font-family: "Bungee";
+}
+
+.navbar {
+  background: #d16014;
+}
